@@ -1,0 +1,50 @@
+@import "reset.import.less";
+@import "mixins.import.less";
+@import "modal.import.less";
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,700,500);
+
+@font-face {
+    font-family: 'UniSansThinCAPS';
+    src: url('fonts/unisansthin.eot');
+    src: url('fonts/unisansthin.eot') format('embedded-opentype'),
+        url('fonts/unisansthin.woff') format('woff'),
+        url('fonts/unisansthin.ttf') format('truetype'),
+        url('fonts/unisansthin.svg#UniSansThinCAPS') format('svg');
+}
+@font-face {
+    font-family: 'UniSansHeavyCAPS';
+    src: url('fonts/unisansheavy.eot');
+    src: url('fonts/unisansheavy.eot') format('embedded-opentype'),
+        url('fonts/unisansheavy.woff') format('woff'),
+        url('fonts/unisansheavy.ttf') format('truetype'),
+        url('fonts/unisansheavy.svg#UniSansHeavyCAPS') format('svg');
+}
+
+.show {
+    display: inherit;
+}
+.hide {
+    display: none !important;
+}
+
+body {
+    background-color: #2b1a4e;
+
+    .font-thin {
+        font-family: 'UniSansThinCAPS';
+    }
+    .font-heavy {
+        font-family: 'UniSansHeavyCAPS';
+    }
+}
+
+.heavy() {
+    font-family: 'UniSansHeavyCAPS';
+}
+.thin() {
+    font-family: 'UniSansThinCAPS';
+}
+
+@import "presentation.import.less";
+@import "client.import.less";

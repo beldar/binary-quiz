@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="121.614px" height="111.422px" viewBox="0 0 121.614 111.422" enable-background="new 0 0 121.614 111.422"
+	 xml:space="preserve">
+<g>
+	<g>
+		<rect x="2" y="9.5" fill="#328184" width="117.614" height="81.5"/>
+	</g>
+	<polygon fill="#3D9999" points="2,9.5 119.176,91 2,91 	"/>
+	<line fill="none" stroke="#266666" stroke-width="3" stroke-miterlimit="10" x1="60.807" y1="0" x2="60.807" y2="6.75"/>
+	<line fill="none" stroke="#266666" stroke-width="3" stroke-miterlimit="10" x1="60.807" y1="91" x2="60.807" y2="110"/>
+	<polyline fill="none" stroke="#266666" stroke-width="3" stroke-miterlimit="10" points="29.96,110 60.807,99.617 91.654,110 	"/>
+	<g>
+		<rect x="1" y="85.75" fill="#266666" width="119.614" height="6.25"/>
+		<path fill="#266666" d="M119.614,86.75V91H2v-4.25H119.614 M121.614,84.75h-2H2H0v2V91v2h2h117.614h2v-2v-4.25V84.75
+			L121.614,84.75z"/>
+	</g>
+	<g>
+		<rect x="1" y="5.5" fill="#266666" width="119.614" height="5"/>
+		<path fill="#266666" d="M119.614,6.5v3H2v-3H119.614 M121.614,4.5h-2H2H0v2v3v2h2h117.614h2v-2v-3V4.5L121.614,4.5z"/>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,242 @@
+/**
+* Mixins
+*/
+
+/**
+* Bottom to top gradient
+*
+* @param @color default color
+* @param @start bottom colour
+* @param @stop top colour
+*/
+.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
+    background: @color;
+    background: -webkit-gradient(linear,
+        left bottom,
+        left top,
+        color-stop(0, @start),
+        color-stop(1, @stop));
+    background: -webkit-linear-gradient(top,
+        @start,
+        @stop);
+    background: -ms-linear-gradient(bottom,
+        @start,
+        @stop);
+    background: -moz-linear-gradient(center bottom,
+        @start 0%,
+        @stop 100%);
+    background: -o-linear-gradient(@stop,
+        @start);
+    background: linear-gradient(to bottom,
+        @start,
+        @stop);
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
+}
+
+/**
+* Transition
+*
+* @param @duration in seconds
+* @param @easing
+*/
+.transition(@prop:all, @duration:0.2s, @ease:ease-out) {
+    -webkit-transition: @prop @duration @ease;
+    -moz-transition: @prop @duration @ease;
+    -o-transition: @prop @duration @ease;
+    transition: @prop @duration @ease;
+}
+
+/**
+* Transition Delay
+*/
+.transition-delay(@duration:0s) {
+    -webkit-transition-delay: @duration;
+    -moz-transition-delay: @duration;
+    -o-transition-delay: @duration;
+    transition-delay: @duration;
+}
+
+/**
+* Transform transition
+* @param @duration in seconds
+* @param @easing
+*/
+.transition-transform(@duration:0.2s, @ease:ease-out) {
+    -webkit-transition: -webkit-transform @duration @ease;
+    -moz-transition: -moz-transform @duration @ease;
+    -o-transition: -o-transform @duration @ease;
+    transition: transform @duration @ease;
+}
+
+/**
+* Box sizing
+* @param @sizing
+*/
+.box-sizing(@sizing: border-box) {
+    -ms-box-sizing: @sizing;
+    -moz-box-sizing: @sizing;
+    -webkit-box-sizing: @sizing;
+    box-sizing: @sizing;
+}
+
+/**
+* Transforms
+* @args
+*/
+.transform(...) {
+    -webkit-transform: @arguments;
+    -moz-transform: @arguments;
+    -o-transform: @arguments;
+    -ms-transform: @arguments;
+    transform: @arguments;
+}
+
+/**
+* Transform origin
+* @args
+*/
+.transform-origin(...) {
+    -webkit-transform-origin: @arguments;
+    -moz-transform-origin: @arguments;
+    -o-transform-origin: @arguments;
+    -ms-transform-origin: @arguments;
+    transform-origin: @arguments;
+}
+
+/**
+* Transform Style
+*/
+.transform-style(@style) {
+    -webkit-transform-style: @style;
+    -moz-transform-style: @style;
+    transform-style: @style;
+}
+
+/**
+* Box Shadow
+*/
+.box-shadow(...) {
+    -webkit-box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+
+/**
+* Border radius
+*/
+.border-radius(@radius: 2px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+.border-top-radius(@radius) {
+    border-top-right-radius: @radius;
+    border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+    border-bottom-right-radius: @radius;
+    border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+    border-bottom-right-radius: @radius;
+    border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+    border-bottom-left-radius: @radius;
+    border-top-left-radius: @radius;
+}
+
+/**
+* Keyframe Animation
+*/
+.animation(...) {
+    -webkit-animation: @arguments;
+    -moz-animation: @arguments;
+    -o-animation: @arguments;
+    -ms-animation: @arguments;
+    animation: @arguments;
+}
+
+/**
+* Keyframe Animation x2
+*/
+.animation-two(@anim1, @anim2) {
+    -webkit-animation: @anim1, @anim2;
+    -moz-animation: @anim1, @anim2;
+    -o-animation: @anim1, @anim2;
+    -ms-animation: @anim1, @anim2;
+    animation: @anim1, @anim2;
+}
+
+/**
+* Backface visibility
+*/
+.backface-visibility(@arg: hidden) {
+    -webkit-backface-visibility: @arg;
+    -moz-backface-visibility: @arg;
+    -o-backface-visibility: @arg;
+    -ms-backface-visibility: @arg;
+    backface-visibility: @arg;
+}
+
+/**
+* Perspective
+*/
+.perspective(@angle) {
+    -webkit-perspective: @angle;
+    -moz-perspective: @angle;
+    perspective: @angle;
+}
+
+/**
+* Opacity
+*/
+.opacity(@opacity: 0.5) {
+    -moz-opacity: @opacity;
+    -khtml-opacity: @opacity;
+    -webkit-opacity: @opacity;
+    opacity: @opacity;
+    @opperc: @opacity * 100;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+    filter: ~"alpha(opacity=@{opperc})";
+}
+
+/**
+* SVG/PNG background
+*/
+.svg-bg(@url) {
+    background-image: url("@{url}.png");
+    background-image: none, url("@{url}.svg");
+}
+
+/**
+* Opacity (No IE support)
+*/
+.opacity-noie(@opacity: 0.5) {
+    -moz-opacity: @opacity;
+    -khtml-opacity: @opacity;
+    -webkit-opacity: @opacity;
+    opacity: @opacity;
+}
+
+/**
+* Appearance
+*/
+.appearance(@type: none) {
+    -webkit-appearance: @type;
+    -moz-appearance: @type;
+    -o-appearance: @type;
+    -ms-appearance: @type;
+}
+
+/**
+* Flip
+*/
+.flip() {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
