@@ -1,4 +1,5 @@
-var Questions = new Meteor.Collection('questions');
+Questions = new Meteor.Collection('questions');
+State = new Meteor.Collection('state');
 
 Router.map(function() {
     this.route('presentation', {path: '/'});
@@ -16,49 +17,87 @@ Router.map(function() {
 });
 
 if (Meteor.isClient) {
-    Session.set("currentQuestion", 1);
-
+    //Session.set("currentSlide", 1);
+    
     Deps.autorun(function () {
-        Meteor.subscribe('onlineUsers');
+        Meteor.subscribe('users');
         Meteor.subscribe('questions');
+        Meteor.subscribe('state', function onReady() {
+            Session.set("currentSlide", State.findOne({name: 'currentSlide'}).value);
+        });
+        State.find({name: 'currentSlide'}).observe({
+            changed: function() {
+                Session.set("currentSlide", State.findOne({name: 'currentSlide'}).value);
+            }
+        });
     });
 
-    //Presentation
+    //**** Presentation ****\\
     Template.presentation.questions = function() {
         return Questions.find({});
     };
 
     Template.question.isCurrent = function() {
-        return this.qnumber === Session.get('currentQuestion') ? "show" : "hide";
+        return this.qnumber === Session.get('currentSlide') ? "show" : "hide";
     };
 
     Template.question.totalUsers = function() {
-        return Meteor.users.find({"status.online": true }).count();
+        return Meteor.users.find({"status.online": true , eliminated: false}).count();
     };
 
-    //Client
+    //**** Client ****\\
     Template.client.questions = function() {
         return Questions.find({});
     };
 
     Template.questionclient.isCurrent = function() {
-        return this.qnumber === Session.get('currentQuestion') ? "show" : "hide";
+        var user = Meteor.user(),
+            extra = '',
+            q;
+        
+        if (!_.isUndefined(user) && !_.isUndefined(user.questions)) {
+            q = _.findWhere(user.questions, {_id:this._id});
+            if (!_.isUndefined(q)) {
+                extra = q.answer;
+            }
+        }
+        return (this.qnumber === Session.get('currentSlide') ? "show" : "hide") + " " + extra;
     };
 
     Template.client.loggedIn = function() {
         return Meteor.user() !== null;
     };
-
+    
+    Template.client.eliminated = function() {
+        return Meteor.user().eliminated ? 'eliminated' : '';
+    }
+    //Events\\
     Template.answerclient.events({
         'click': function(evt) {
-            console.log(this.correct, this.qnumber);
-            if (this.correct) {
-                $(evt.target).parents('.valign').find('.correct').css('display', 'block');
-            } else {
-                Meteor.call('eliminate');
-            }
-            Questions.update(this.id, {$inc : {answered: 1}});
+            var qid = $(evt.target).parents('.b-slide-question').data('qid'),
+                state = this.correct ? 'correct' : 'incorrect';
+            $(evt.target).parents('.b-slide-question').addClass(state);
+            Questions.update(qid, {$inc : {answered: 1}});
+            Meteor.call('answer', qid, state);
+            console.log(Meteor.user());
         }
+    });
+    
+    //**++ Controller ****\\
+    Template.controller.currentSlide = function() {
+        return Session.get('currentSlide');
+    };
+    Template.controller.users = function() {
+        return Meteor.users.find({eliminated: false});
+    };
+    //Events\\
+    Template.controller.events({
+        'click #next': function(evt) {
+            Meteor.call('nextSlide');
+        },
+        'click #prev': function(evt) {
+            Meteor.call('prevSlide');
+        },
     });
 }
 
@@ -92,18 +131,47 @@ if (Meteor.isServer) {
             ],
             answered: 0
         });
+        State.remove({});
+        State.insert({
+            name: 'currentSlide',
+            value: 1           
+        });
+    });
+    
+    Accounts.onCreateUser(function(options, user) {
+        var email = user.emails[0].address;
+        user.profile = {};
+        user.profile.email = email;
+        user.eliminated = false;
+        return user;
     });
 
     Meteor.methods({
-        eliminate: function() {
-            Meteor.users.update(Meteor.userId, {"user.status.eliminated":true});
+        answer: function(qid, state) {
+            if (_.isUndefined(_.findWhere(Meteor.user().questions, {_id:qid}))) {
+                Meteor.users.update(Meteor.userId(), {$push: {"questions":{_id:qid, answer:state}}});
+                if (state === 'incorrect') {
+                    Meteor.users.update(Meteor.userId(), {$set : {"eliminated":true}});
+                }
+            }
+        },
+        nextSlide: function() {
+            var id = State.findOne({name: 'currentSlide'})._id;
+            State.update(id, {$inc : {value: 1}});
+        },
+        prevSlide: function() {
+            var id = State.findOne({name: 'currentSlide'})._id;
+            State.update(id, {$inc : {value: -1}});
         }
     });
 
-    Meteor.publish("onlineUsers", function() {
+    Meteor.publish("users", function() {
         return Meteor.users.find({ "status.online": true });
     });
     Meteor.publish("questions", function() {
         return Questions.find({});
+    });
+    Meteor.publish("state", function() {
+        return State.find({});
     });
 }

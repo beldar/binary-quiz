@@ -1,0 +1,40 @@
+<template name="presentation">
+    <div class="b-presentation">
+        {{#each questions}}
+        {{ > question}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="question">
+    <section class="b-slide-question {{isCurrent}}" id="question{{id}}" data-qid="{{id}}">
+        <div class="timebarwrap">
+            <div class="timebar"></div>
+        </div>
+        <div class="timer">0:10</div>
+        <div class="qnumber">Question <span>{{qnumber}}</span></div>
+        <div class="total-answers">
+            <p>Players answered:</p>
+            <p><span class="total">{{answered}}</span> / <span class="possible">{{totalUsers}}</span></p>
+        </div>
+        <!-- Title -->
+        <h2 class="title">{{ question }}</h2>
+        <!-- Questions -->
+        <ol class="questions">
+            {{#each answers}}
+            {{>answer}}
+            {{/each}}
+        </ol>
+        <!-- Results -->
+        <div class="results hide">
+            <h1>Results</h1>
+            <div><span class="correct">0</span><span class="right">Right</span></div>
+            <div class="slash">/</div>
+            <div><span class="incorrect">0</span><span class="wrong">Wrong</span></div>
+        </div>
+    </section>
+</template>
+
+<template name="answer">
+    <li class="question">{{ answer }}</li>
+</template>

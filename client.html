@@ -1,0 +1,81 @@
+<template name="client">
+    {{#if loggedIn }}
+        <div class="b-client">
+            {{#each questions}}
+            {{ > questionclient}}
+            {{/each}}
+        </div>
+        <!-- Modal -->
+        <div class="b-modal {{eliminated}}">
+            <div class="eliminated">
+                <div class="section" id="section1">
+                    <div class="valign">
+                        <span class="out_emoticon"></span><br/>
+                        <h2 class="title">You're out</h2>
+                        <h3>Better luck next time</h3>
+                    </div>
+                </div>
+                <div class="section" id="section2">
+                    <div class="valign">
+                        <span class="vccp_digital"></span><br/>
+                        <h2 class="title">Thanks for playing!</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {{ else }}
+        {{>login}}
+    {{/if}}
+</template>
+
+<template name="login">
+    <header>
+        <div id="logo_mobile"></div>
+        <h1>Join now</h1>
+        <!--<p>Enter your details below to join</p>-->
+    </header>
+    <div class="b-login b-vertical-align">
+        <div id="login">
+            {{> loginButtons}}
+        </div>
+    </div>
+</template>
+
+<template name="questionclient">
+    <section class="b-slide-question {{isCurrent}} b-vertical-align" id="question{{qnumber}}" data-qid="{{_id}}">
+        <div class="timebarwrap">
+            <div class="timebar"></div>
+        </div>
+        <div class="qnumber">Question <span>{{qnumber}}</span></div>
+        <div class="valign">
+            <div class="question-and-answers">
+                <h2 class="question">{{ question }}</h2>
+                <div class="answers">
+                    {{#each answers}}
+                    {{>answerclient}}
+                    {{/each}}
+                </div>
+            </div>
+            <div class="thanks">
+                <h2>Thanks!</h2>
+            </div>
+            <div class="already-answered">
+                <h2>You've already answered!</h2>
+            </div>
+            <div class="correct">
+                <span class="correct_tick"></span>
+                <h2>Correct!</h2>
+            </div>
+            <div class="incorrect">
+                <h2>Wrong!</h2>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template name="answerclient">
+    <a class="answer" data-action="answer">
+        {{ answer }}
+    </a>
+</template>

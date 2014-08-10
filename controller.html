@@ -1,0 +1,13 @@
+<template name="controller">
+    <div id="controller">
+        <h1>Current Slide: {{currentSlide}}</h1>
+        <a id="prev" href="#">Previous</a>
+        <a id="next" href="#">Next</a>
+        <ul id="users">
+            <h2>Users</h2>
+            {{#each users}}
+            <li>{{profile.email}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</template>

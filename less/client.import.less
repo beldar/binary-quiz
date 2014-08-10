@@ -57,8 +57,12 @@ body.client {
             background: transparent;
         }
     }
-
-    .b-modal[data-active="eliminated"] {
+    
+    .b-modal {
+        display: none;
+    }
+    
+    .b-modal.eliminated {
         padding: 0;
         display: block;
 
@@ -405,6 +409,7 @@ body.client {
             width: 90%;
             margin-left: auto;
             margin-right: auto;
+            width: 100%;
         }
 
         .answers {
@@ -516,11 +521,12 @@ body.client {
 
     .correct {
         background: #9bab23;
-        position: absolute;
+        height: 100%;
+        /*position: absolute;
         width: 100%;
         margin-left: -20px;
         top: 0;
-        height: 100%;
+        */
         h2 {
             font-family: 'Roboto', sans-serif;
             font-weight: 300;
