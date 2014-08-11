@@ -43,6 +43,7 @@
 </template>
 
 <template name="questionclient">
+    {{#if isQuestion}}
     <section class="b-slide-question {{isCurrent}} b-vertical-align" id="question{{qnumber}}" data-qid="{{_id}}">
         <div class="timebarwrap">
             <div class="timebar"></div>
@@ -72,6 +73,29 @@
             </div>
         </div>
     </section>
+    {{else}}
+    <section class="b-slide-welcome b-vertical-align {{isCurrent}}"  id="question{{qnumber}}" data-qid="{{_id}}">
+        <div class="valign">
+            <h1>Waiting for other players to join</h1>
+            <div id="noTrespassingOuterBarG">
+                <div id="noTrespassingFrontBarG" class="noTrespassingAnimationG">
+                    <div class="noTrespassingBarLineG">
+                    </div>
+                    <div class="noTrespassingBarLineG">
+                    </div>
+                    <div class="noTrespassingBarLineG">
+                    </div>
+                    <div class="noTrespassingBarLineG">
+                    </div>
+                    <div class="noTrespassingBarLineG">
+                    </div>
+                    <div class="noTrespassingBarLineG">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{/if}}
 </template>
 
 <template name="answerclient">

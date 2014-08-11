@@ -7,7 +7,8 @@
 </template>
 
 <template name="question">
-    <section class="b-slide-question {{isCurrent}}" id="question{{id}}" data-qid="{{id}}">
+    {{#if isQuestion}}
+    <section class="b-slide-question {{isCurrent}}" id="question{{qnumber}}" data-qid="{{id}}">
         <div class="timebarwrap">
             <div class="timebar"></div>
         </div>
@@ -33,6 +34,37 @@
             <div><span class="incorrect">0</span><span class="wrong">Wrong</span></div>
         </div>
     </section>
+    {{else}}
+    <section class="b-slide-welcome {{isCurrent}}" id="question{{qnumber}}" data-qid="{{id}}">
+        <div id="logo"></div>
+        <h1>Binary<span>Quiz</span></h1>
+
+        <div id="countdownwrap">
+            <h2>Countdown to Quiz</h2>
+
+            <table id="countdown">
+                <tr class="numbers">
+                    <td data-type="days">0</td>
+                    <td data-type="hours">0</td>
+                    <td data-type="minutes">0</td>
+                    <td data-type="seconds">0</td>
+                </tr>
+                <tr class="strings">
+                    <td>Days</td>
+                    <td>Hours</td>
+                    <td>Mins</td>
+                    <td>Secs</td>
+                </tr>
+            </table>
+        </div>
+        <div id="loginwrap">
+            <!--<h3>come down to digital studio at 5pm &amp; bring your mobile</h3>-->
+            <h3>To play, join now via mobile</h3><br/>
+            <p class="url">bit.ly/digiquiz</p>
+        </div>
+
+    </section>
+    {{/if}}
 </template>
 
 <template name="answer">
